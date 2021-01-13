@@ -1,24 +1,23 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 
 import "./index.scss";
+interface Props {
+  onClick(e: MouseEvent): void;
+  buttonsList: string[];
+  id: string;
+  className: string;
+}
 
-const KeyBoard = () => {
-  const operators: Array<string> = ["<", "/", "x", "-", "+", "="];
-  const numbers: Array<string> = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "+/-", "0", ","];
+const KeyBoard = ({ id, className, buttonsList, onClick }: Props) => {
   return (
-    <div className="c-keyboard">
-      <div className="c-keyboard__complex-operators"></div>
-      <div id="operators" className="c-keyboard__operators">
-        {operators.map((key) => (
-          <div className="button" key={key}>{key}</div>
-        ))}
-      </div>
-  
-      <div id="numbers" className="c-keyboard__numbers">
-      {numbers.map((key) => (
-          <div className="button" key={key}>{key}</div>
-        ))}
-      </div>
+    <div id={id} className={className} onClick={onClick}>
+      {
+        buttonsList.map((key) => (
+          <div className="button" key={key}>
+            {key}
+          </div>
+        ))
+      }
     </div>
   );
 };
