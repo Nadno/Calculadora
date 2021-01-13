@@ -43,7 +43,10 @@ const App = () => {
   };
 
   const addOperation = (op: string) => {
-    if (operation || (!currentValue && !result)) return;
+    const lastChar = oldOperations[oldOperations.length - 1];
+    if (["/", "x", "-", "+"].includes(lastChar) && !currentValue)
+      return;
+
     setOldOperations(`${oldOperations} ${currentValue} ${op}`);
 
     const addOperationOverOperation = !!operation;
@@ -92,8 +95,7 @@ const App = () => {
       },
 
       ",": () => {
-        const lastChar = currentValue.length - 1;
-        if (currentValue[lastChar] === ",") return;
+        if (currentValue.includes(",")) return;
 
         let value = button;
         if (!currentValue) value = "0,";
